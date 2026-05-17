@@ -22,21 +22,72 @@ As questões usam modelagem lógica e verificação com Z3 para analisar fórmul
 
 ## Dependências
 
-Para executar os arquivos Python:
+Para editar, executar e compilar os programas deste repositório, instale:
 
-- Python 3
-- Pacote `z3-solver`
+1. VS Code
+2. Git
+3. Python 3
+4. Z3 Solver
+5. MSYS2, no Windows
+6. CMake
+7. Extensões do VS Code
 
-Instalação:
+Os scripts Python usam o pacote `z3-solver`. Os programas C++ usam um compilador C++, como `g++`, e a biblioteca Z3 instalada com os headers de C++. O CMake é recomendado para integração com o VS Code, mesmo que os comandos de compilação abaixo usem `g++` diretamente.
+
+### Extensões do VS Code
+
+Instale estas extensões no VS Code:
+
+- C/C++ (`ms-vscode.cpptools`)
+- Python (`ms-python.python`)
+- CMake Tools (`ms-vscode.cmake-tools`)
+
+### Windows
+
+No Windows, use o MSYS2 com o ambiente UCRT64 para instalar `g++`, Z3, Python e CMake.
+
+1. Instale o VS Code: <https://code.visualstudio.com/>
+2. Instale o Git: <https://git-scm.com/download/win>
+3. Instale o MSYS2: <https://www.msys2.org/>
+4. Abra o terminal **MSYS2 UCRT64**.
+5. Atualize os pacotes e instale as dependências:
 
 ```bash
-pip install z3-solver
+pacman -Syu
+pacman -S --needed git mingw-w64-ucrt-x86_64-gcc mingw-w64-ucrt-x86_64-z3 mingw-w64-ucrt-x86_64-python mingw-w64-ucrt-x86_64-python-pip mingw-w64-ucrt-x86_64-cmake
+python -m pip install z3-solver
 ```
 
-Para compilar os arquivos C++ com Z3:
+Depois disso, os comandos com `python` e `g++ ... -lz3` devem funcionar no terminal UCRT64.
 
-- Compilador C++, como `g++`
-- Biblioteca Z3 instalada com suporte a C++
+### macOS
+
+Com o Homebrew instalado:
+
+```bash
+brew install git python z3 cmake
+python3 -m pip install z3-solver
+```
+
+Instale também o VS Code: <https://code.visualstudio.com/>
+
+### Ubuntu
+
+```bash
+sudo apt update
+sudo apt install -y git python3 python3-pip g++ z3 libz3-dev cmake
+python3 -m pip install --user z3-solver
+```
+
+Instale também o VS Code: <https://code.visualstudio.com/>
+
+Se o `pip` do sistema bloquear instalações globais, crie um ambiente virtual:
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install z3-solver
+```
 
 ## Execução
 
